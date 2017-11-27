@@ -1,19 +1,19 @@
 {
-  "name": "cz-conventional-changelog",
+  "name": "inturn-conventional-changelog",
   "version": "0.0.0-semantically-released.0",
-  "description": "Commitizen adapter following the conventional-changelog format.",
+  "description": "Commitizen adapter following the conventional-changelog format built for INTURN. Forked from https://github.com/commitizen/cz-conventional-changelog",
   "main": "index.js",
   "scripts": {
     "commit": "git-cz",
     "test": "echo 'Tests need to be setup!'",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
-  "homepage": "https://github.com/commitizen/cz-conventional-changelog",
+  "homepage": "https://github.com/cherealnice/cz-conventional-changelog",
   "repository": {
     "type": "git",
-    "url": "https://github.com/commitizen/cz-conventional-changelog.git"
+    "url": "https://github.com/cherealnice/cz-conventional-changelog.git"
   },
-  "author": "Jim Cummins <jimthedev@gmail.com>",
+  "author": "Dan Cherouny <dcherouny@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "conventional-commit-types": "^2.0.0",
