@@ -4,6 +4,7 @@ var wrap = require('word-wrap');
 var map = require('lodash.map');
 var longest = require('longest');
 var rightPad = require('right-pad');
+var branch = require('git-branch');
 
 var filter = function(array) {
   return array.filter(function(x) {
@@ -64,32 +65,13 @@ module.exports = function (options) {
           message: 'Write a short, imperative tense description of the change:\n'
         }, {
           type: 'input',
+          name: 'ticket',
+          message: 'Add ticket reference (default is branch name)\n',
+          default: branch.sync()
+        }, {
+          type: 'input',
           name: 'body',
           message: 'Provide a longer description of the change: (press enter to skip)\n'
-        }, {
-          type: 'confirm',
-          name: 'isBreaking',
-          message: 'Are there any breaking changes?',
-          default: false
-        }, {
-          type: 'input',
-          name: 'breaking',
-          message: 'Describe the breaking changes:\n',
-          when: function(answers) {
-            return answers.isBreaking;
-          }
-        }, {
-          type: 'confirm',
-          name: 'isIssueAffected',
-          message: 'Does this change affect any open issues?',
-          default: false
-        }, {
-          type: 'input',
-          name: 'issues',
-          message: 'Add issue references (e.g. "fix #123", "re #123".):\n',
-          when: function(answers) {
-            return answers.isIssueAffected;
-          }
         }
       ]).then(function(answers) {
 
@@ -110,7 +92,7 @@ module.exports = function (options) {
         var head = (answers.type + scope + ': ' + answers.subject.trim()).slice(0, maxLineWidth);
 
         // Wrap these lines at 100 characters
-        var body = wrap(answers.body, wrapOptions);
+        var body = wrap(answers.ticket + '\n' + answers.body, wrapOptions);
 
         // Apply breaking change prefix, removing it if already present
         var breaking = answers.breaking ? answers.breaking.trim() : '';
